@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+// To verify email add implements MustVerifyEmail after Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
+    // for MFA add TwoFactorAuthenticatable
     use HasFactory, Notifiable;
 
     /**
@@ -16,9 +18,18 @@ class User extends Authenticatable
      *
      * @var array
      */
+//    protected $guarded = [];
     protected $fillable = [
-        'name',
+        'username',
         'email',
+//        'firstname',
+//        'lastname',
+//        'jobtitle',
+//        'bio',
+//        'avatar',
+//        'profile_img',
+//        'provider_id',
+//        'provider',
         'password',
     ];
 
