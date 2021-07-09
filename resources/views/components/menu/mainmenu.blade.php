@@ -30,8 +30,8 @@
                                     <div class="flex items-center">
                                         <button type="button" @click="isDropdownOpen = !isDropdownOpen" @click.away="isDropdownOpen = false" class="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-700 focus:ring-white" id="user-menu" aria-haspopup="true">
                                             <span class="sr-only">Open user menu</span>
-                                            {{--                                            <img class="h-8 w-8 rounded-full" src="{{ current_user()->avatar }}" alt="">--}}
-                                            <img class="h-8 w-8 rounded-full" src="{{ asset('images/avatars/user.png') }}" alt="">
+                                            <img class="h-8 w-8 rounded-full" src="{{ current_user()->avatar }}" alt="">
+{{--                                            <img class="h-8 w-8 rounded-full" src="{{ asset('images/avatars/user.png') }}" alt="">--}}
                                         </button>
                                     </div>
                                     <div x-show="isDropdownOpen"
@@ -86,8 +86,8 @@
                     <div class="flex justify-between items-center mr-8">
                         <div class="flex items-center px-5">
                             <div class="flex-shrink-0">
-                                {{--                                <img class="h-10 w-10 rounded-full" src="{{ auth()->user()->avatar }}" alt="Avatar">--}}
-                                <img class="h-10 w-10 rounded-full" src="{{ asset('images/avatars/user.png') }}" alt="Avatar">
+                                <img class="h-10 w-10 rounded-full" src="{{ current_user()->avatar }}" alt="Avatar">
+{{--                                <img class="h-10 w-10 rounded-full" src="{{ asset('images/avatars/user.png') }}" alt="Avatar">--}}
                             </div>
                             <div class="ml-3">
                                 <div class="font-bold leading-none text-red-700">{{ current_user()->username }}</div>
