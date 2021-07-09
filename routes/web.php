@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\admin\UserController;
@@ -53,6 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //    Route::get('/profiles/{user:name}/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
 //});
 
-//Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin', 'verified'])->group(function (){
-//    Route::resource('/users', UserController::class);
-//});
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin', 'verified'])->group(function (){
+    Route::resource('/users', UserController::class);
+});
+
