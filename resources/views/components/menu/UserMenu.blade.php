@@ -25,7 +25,8 @@
         </div>
     @endcan
 
-    <a href="{{ route('tweets.index') }}" class="bg-teal-50 border-red-700 bg-red-100 text-teal-700 hover:bg-teal-50 hover:text-teal-700 group border-l-4 px-3 py-2 flex items-center text-sm font-medium" aria-current="page">
+{{--    <a href="{{ route('tweets.index') }}" class="bg-teal-50 border-red-700 bg-red-100 text-teal-700 hover:bg-teal-50 hover:text-teal-700 group border-l-4 px-3 py-2 flex items-center text-sm font-medium" aria-current="page">--}}
+    <a href="#" class="bg-teal-50 border-red-700 bg-red-100 text-teal-700 hover:bg-teal-50 hover:text-teal-700 group border-l-4 px-3 py-2 flex items-center text-sm font-medium" aria-current="page">
         <svg class="text-teal-500 group-hover:text-teal-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
         </svg>
@@ -60,28 +61,32 @@
         <span class="truncate">Bookmarks</span>
     </a>
 
-    <a href="{{ route('profiles.show', current_user()->name ) }}" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">
+{{--    <a href="{{ route('profiles.show', current_user()->name ) }}" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">--}}
+    <a href="#" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">
         <svg class="text-teal-500 group-hover:text-teal-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
         </svg>
         <span class="truncate">Profile</span>
     </a>
 
-    <a href="{{ route('profiles.edit', current_user()->name ) }}" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">
+{{--    <a href="{{ route('profiles.edit', current_user()->name ) }}" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">--}}
+    <a href="#" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">
         <svg class="text-teal-500 group-hover:text-teal-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
         </svg>
         <span class="truncate">Edit Profile</span>
     </a>
 
-    <a href="{{ route('password') }}" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">
+{{--    <a href="{{ route('password') }}" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">--}}
+    <a href="#" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">
         <svg class="text-gray-700 flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
         </svg>
         <span class="truncate">Change password</span>
     </a>
 
-    <a href="{{ route('two-factor-auth') }}" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">
+{{--    <a href="{{ route('two-factor-auth') }}" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">--}}
+    <a href="#" class="border-transparent text-gray-700 group border-l-4 hover:border-red-700 px-3 py-2 flex items-center text-sm font-medium">
         <svg class="text-green-700 flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm2 2V5h1v1H5zm-2 7a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zm2 2v-1h1v1H5zm8-12a1 1 0 00-1 1v3a1 1 0 001 1h3a1 1 0 001-1V4a1 1 0 00-1-1h-3zm1 2v1h1V5h-1z" clip-rule="evenodd"/>
             <path d="M11 4a1 1 0 10-2 0v1a1 1 0 002 0V4zm-1 3a1 1 0 011 1v1h2a1 1 0 110 2h-3a1 1 0 01-1-1V8a1 1 0 011-1zm6 2a1 1 0 100 2 1 1 0 000-2zm-7 4a1 1 0 011-1h1a1 1 0 110 2v2a1 1 0 11-2 0v-3zm-2-2a1 1 0 100-2H4a1 1 0 100 2h3zm10 2a1 1 0 01-1 1h-2a1 1 0 110-2h2a1 1 0 011 1zm-1 4a1 1 0 100-2h-3a1 1 0 100 2h3z"/>
