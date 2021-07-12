@@ -29,9 +29,26 @@ class LoginController extends Controller
     {
         $socialiteUser = Socialite::driver($provider)->user();
 
-        if ($provider == 'facebook')
-        {
-            $newname = str_replace(' ', '_', $socialiteUser->getName());
+        $users = User::where('email', '=', $socialiteUser->getEmail())->first();
+        if ($users === null) {
+
+            if ($provider == 'facebook')
+            {
+                $nickname = str_replace(' ', '_', $socialiteUser->getName());
+
+                $user = User::firstOrCreate(
+                    [
+                        'provider' => $provider,
+                        'provider_id' => $socialiteUser->getId(),
+                    ],
+
+                    [
+                        'username' => $nickname,
+                        'email' => $socialiteUser->getEmail(),
+                        'avatar' => $socialiteUser->getName(),
+                    ]
+                );
+            }
 
             $user = User::firstOrCreate(
                 [
@@ -40,26 +57,16 @@ class LoginController extends Controller
                 ],
 
                 [
-                    'username' => $newname,
+                    'username' => $socialiteUser->getNickname(),
                     'email' => $socialiteUser->getEmail(),
-                    'avatar' => $socialiteUser->getName(),
+                    'avatar' => $socialiteUser->getAvatar()
                 ]
             );
+        } else {
+
+            return redirect()->route('login')->with('ErrorLogin', 'e-mail address is already in use!');;
+
         }
-
-        $user = User::firstOrCreate(
-            [
-                'provider' => $provider,
-                'provider_id' => $socialiteUser->getId(),
-            ],
-
-            [
-                'username' => $socialiteUser->getNickname(),
-                'email' => $socialiteUser->getEmail(),
-                'avatar' => $socialiteUser->getAvatar()
-            ]
-        );
-
         // Log the user in
         Auth::login($user, true);
 
