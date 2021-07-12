@@ -29,44 +29,48 @@ class LoginController extends Controller
     {
         $socialiteUser = Socialite::driver($provider)->user();
 
-        $users = User::where('email', '=', $socialiteUser->getEmail())->first();
-        if ($users === null) {
+        $existingUsr = User::where('email', $socialiteUser->getEmail())->first();
 
-            if ($provider == 'facebook')
-            {
-                $nickname = str_replace(' ', '_', $socialiteUser->getName());
+        if ($existingUsr) {
+            Auth::login($existingUsr, TRUE);
 
-                $user = User::firstOrCreate(
-                    [
-                        'provider' => $provider,
-                        'provider_id' => $socialiteUser->getId(),
-                    ],
+            return redirect('home');
+        }
 
-                    [
-                        'username' => $nickname,
-                        'email' => $socialiteUser->getEmail(),
-                        'avatar' => $socialiteUser->getName(),
-                    ]
-                );
-            }
+//        if (! $socialiteUser->getEmail()) {
+//            return redirect()->route('social-register', ['token' => $user->token]);
+//        }
+
+        if ($provider == 'facebook')
+        {
+            $nickname = str_replace(' ', '_', $socialiteUser->getName());
 
             $user = User::firstOrCreate(
                 [
                     'provider' => $provider,
                     'provider_id' => $socialiteUser->getId(),
                 ],
-
                 [
-                    'username' => $socialiteUser->getNickname(),
+                    'username' => $nickname,
                     'email' => $socialiteUser->getEmail(),
-                    'avatar' => $socialiteUser->getAvatar()
+                    'avatar' => $socialiteUser->getAvatar(),
                 ]
             );
-        } else {
-
-            return redirect()->route('login')->with('ErrorLogin', 'e-mail address is already in use!');;
-
         }
+
+        $user = User::firstOrCreate(
+            [
+                'provider' => $provider,
+                'provider_id' => $socialiteUser->getId(),
+            ],
+
+            [
+                'username' => $socialiteUser->getNickname(),
+                'email' => $socialiteUser->getEmail(),
+                'avatar' => $socialiteUser->getAvatar()
+            ]
+        );
+
         // Log the user in
         Auth::login($user, true);
 
