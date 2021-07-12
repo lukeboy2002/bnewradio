@@ -5,6 +5,7 @@ namespace App\Http\Controllers\auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -30,6 +31,8 @@ class LoginController extends Controller
 
         if ($provider == 'facebook')
         {
+            $newname = str_replace(' ', '_', $socialiteUser->getName());
+
             $user = User::firstOrCreate(
                 [
                     'provider' => $provider,
@@ -37,9 +40,9 @@ class LoginController extends Controller
                 ],
 
                 [
-                    'username' => $socialiteUser->getName(),
+                    'username' => $newname,
                     'email' => $socialiteUser->getEmail(),
-//                    'avatar' => $socialiteUser->getAvatar(),
+                    'avatar' => $socialiteUser->getName(),
                 ]
             );
         }
@@ -53,12 +56,12 @@ class LoginController extends Controller
             [
                 'username' => $socialiteUser->getNickname(),
                 'email' => $socialiteUser->getEmail(),
-//                'avatar' => $socialiteUser->getAvatar(),
+                'avatar' => $socialiteUser->getAvatar()
             ]
         );
 
         // Log the user in
-        auth()->login($user, true);
+        Auth::login($user, true);
 
         // Redirect to dashboard
         return redirect('home');
