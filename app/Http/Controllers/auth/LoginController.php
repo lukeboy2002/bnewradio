@@ -25,57 +25,69 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback(Request $request, $provider)
     {
         $socialiteUser = Socialite::driver($provider)->user();
 
-        $existingUsr = User::where('email', $socialiteUser->getEmail())->first();
+        $existingUser = User::where('provider_id', $socialiteUser->getId() )->first();
+        $existingMail = User::where('email', $socialiteUser->getEmail())->first();
 
-        if ($existingUsr) {
-            Auth::login($existingUsr, TRUE);
+        if ($existingUser) {
+            Auth::login($existingUser, TRUE);
 
             return redirect('home');
-        }
+
+        } elseif ($existingMail) {
+
+            $request->session()->flash('ErrorLogin', 'Your email is already in use. Try another login provider or create a new account');
+
+            return redirect(route('login'));
+
+
+        } else {
 
 //        if (! $socialiteUser->getEmail()) {
 //            return redirect()->route('social-register', ['token' => $user->token]);
 //        }
 
-        if ($provider == 'facebook')
-        {
-            $nickname = str_replace(' ', '_', $socialiteUser->getName());
+            if ($provider == 'facebook') {
+                $nickname = str_replace(' ', '_', $socialiteUser->getName());
+
+                $user = User::firstOrCreate(
+                    [
+                        'provider' => $provider,
+                        'provider_id' => $socialiteUser->getId(),
+                    ],
+                    [
+                        'username' => $nickname,
+                        'email' => $socialiteUser->getEmail(),
+                        'avatar' => $socialiteUser->getAvatar(),
+                    ]
+                );
+            }
 
             $user = User::firstOrCreate(
                 [
                     'provider' => $provider,
                     'provider_id' => $socialiteUser->getId(),
                 ],
+
                 [
-                    'username' => $nickname,
+                    'username' => $socialiteUser->getNickname(),
                     'email' => $socialiteUser->getEmail(),
-                    'avatar' => $socialiteUser->getAvatar(),
+                    'avatar' => $socialiteUser->getAvatar()
                 ]
             );
+
+            // Log the user in
+            Auth::login($user, true);
+
+            // Redirect to dashboard
+            return redirect('home');
         }
-
-        $user = User::firstOrCreate(
-            [
-                'provider' => $provider,
-                'provider_id' => $socialiteUser->getId(),
-            ],
-
-            [
-                'username' => $socialiteUser->getNickname(),
-                'email' => $socialiteUser->getEmail(),
-                'avatar' => $socialiteUser->getAvatar()
-            ]
-        );
-
-        // Log the user in
-        Auth::login($user, true);
-
-        // Redirect to dashboard
-        return redirect('home');
     }
+
+
+
 
 }
